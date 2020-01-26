@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build Docker') {
             steps {
-                sh 'sudo docker build -t flask-app .'
+                echo 'Hello world'
             }
         }
         stage('Run Docker Container') {
