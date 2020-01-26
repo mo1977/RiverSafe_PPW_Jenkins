@@ -1,14 +1,16 @@
 pipeline {
+    agent any
 
-  agent any
-  
-  stages {
-    stage('Build Docker') {
-    sh 'sudo docker build -t flask-app .'
+    stages {
+        stage('Build Docker') {
+            steps {
+                sh 'sudo docker build -t flask-app .'
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                sh 'sudo docker run -p 8000:8000 --name flask-app -d flask-app'
+            }
+        }
     }
-    stage("run docker container"){
-    sh 'sudo docker run -p 8000:8000 --name flask-app -d flask-app'
-    }
-  }
-    
 }
