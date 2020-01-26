@@ -1,44 +1,14 @@
 pipeline {
-    agent any
-    stages{
-        stage('Build Docker Image'){
-            steps {
-            sh 'sudo docker build -t flask-app .'
-            }
-            post {
-                success {
-                    echo 'Docker Image Build Is complete'
-                }
-            }
-        }
-        stage ('Deploy to Staging'){
-            steps {
-                build job: 'Deploy-to-staging'
-            }
-        }
 
-        stage ('Deploy to Production'){
-            steps{
-                timeout(time:5, unit:'DAYS'){
-                    input (message:'Approve PRODUCTION Deployment?')
-                }
-            steps {
-                sh 'sudo docker run -p 8000:8000 --name flask-app -d flask-app'
-                }
-
-                build job: 'Deploy-to-Prod'
-            }
-            post {
-                success {
-                    echo 'Code deployed to Production.'
-                }
-
-                failure {
-                    echo ' Deployment failed.'
-                }
-            }
-        }
-
-
+  agent any
+  
+  stages {
+    stage('Build Docker') {
+    sh 'sudo docker build -t flask-app .''
     }
+    stage("run docker container"){
+    sh 'sudo docker run -p 8000:8000 --name flask-app -d flask-app'
+    }
+  }
+    
 }
