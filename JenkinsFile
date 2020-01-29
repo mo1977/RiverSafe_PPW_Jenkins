@@ -3,12 +3,7 @@ pipeline {
 
     stages {
         stage('Post Build Message') {
-            
-            post {
-                success {
-                    echo 'Image builing is complete'
-                }
-            }
+            echo 'Image builing is complete'
         }
     }
 }
