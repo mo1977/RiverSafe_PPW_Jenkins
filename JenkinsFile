@@ -2,14 +2,12 @@ pipeline {
     agent { dockerfile true }
 
     stages {
-        stage('Build Docker') {
-            steps {
-                echo 'Hello world'
-            }
-        }
-        stage('Run Docker Container') {
-            steps {
-                sh 'sudo docker run -p 8000:8000 --name flask-app -d flask-app'
+        stage('Post Build Message') {
+            
+            post {
+                success {
+                    echo 'Image builing is complete'
+                }
             }
         }
     }
