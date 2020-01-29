@@ -3,5 +3,5 @@ COPY . /flaskApp
 WORKDIR /flaskApp
 RUN pip install -r requirements.txt
 EXPOSE 8000
-CMD ["python", "src/app.py"]
+CMD ["python", "app.py"]
 
