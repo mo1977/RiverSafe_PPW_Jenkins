@@ -3,7 +3,9 @@ pipeline {
 
     stages {
         stage('Post Build Message') {
+          steps{
             echo 'Image builing is complete'
+        }
         }
     }
 }
